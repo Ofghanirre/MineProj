@@ -1,0 +1,6 @@
+name: 'GeoProjective'
+version: '1.0.0'
+description: "This plugin does so much stuff it can't be contained!"
+main: "fr.ofghanirre.mineproj.GeoProjectivePlugin"
+api-version: '1.20'
+author: Ofghanirre
