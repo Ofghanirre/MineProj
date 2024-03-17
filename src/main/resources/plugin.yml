@@ -4,3 +4,9 @@ description: "This plugin does so much stuff it can't be contained!"
 main: "fr.ofghanirre.mineproj.GeoProjectivePlugin"
 api-version: '1.20'
 author: Ofghanirre
+
+commands:
+  cga:
+    description: Cga module commands
+    usage: /cga <arguments...>
+    permission: cga.cmd
