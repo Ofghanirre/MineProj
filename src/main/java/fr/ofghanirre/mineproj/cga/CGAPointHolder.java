@@ -27,10 +27,10 @@ public class CGAPointHolder {
                     if (registeredPoints.isEmpty()) return;
                     for (int i = 0; i < registeredPoints.size() - 1; i++) {
                         CGAPoint point = registeredPoints.get(i);
-                        this.world.spawnParticle(Particle.VILLAGER_HAPPY, point.x, point.y, point.z, 0, 0.01, 0.01, 0.01);
+                        this.world.spawnParticle(Particle.VILLAGER_HAPPY, point.getX(), point.getY(), point.getZ(), 0, 0.01, 0.01, 0.01);
                     }
                     CGAPoint lastPoint = registeredPoints.get(registeredPoints.size() - 1);
-                    this.world.spawnParticle(Particle.FLAME, lastPoint.x, lastPoint.y, lastPoint.z, 0, 0.01, 0.01, 0.01);
+                    this.world.spawnParticle(Particle.FLAME, lastPoint.getX(), lastPoint.getY(), lastPoint.getZ(), 0, 0.01, 0.01, 0.01);
                 },
                 10L, 5L);
     }
@@ -39,7 +39,7 @@ public class CGAPointHolder {
     public int addPoint(CGAPoint point) {
         registeredPoints.add(point);
         for (int i = 0; i < 64; i++) {
-            this.world.spawnParticle(Particle.PORTAL, point.x, point.y, point.z, 2);
+            this.world.spawnParticle(Particle.PORTAL, point.getX(), point.getY(), point.getZ(), 2);
         }
         return registeredPoints.size();
     }
@@ -49,7 +49,7 @@ public class CGAPointHolder {
             if (!registeredPoints.isEmpty()) {
                 CGAPoint point = registeredPoints.remove(registeredPoints.size() - 1);
                 for (int i = 0; i < 3; i++) {
-                    this.world.spawnParticle(Particle.EXPLOSION_LARGE, point.x, point.y, point.z, 2);
+                    this.world.spawnParticle(Particle.EXPLOSION_LARGE, point.getX(), point.getY(), point.getZ(), 2);
                 }
                 deletedRegisteredPoints.add(point);
             } else {

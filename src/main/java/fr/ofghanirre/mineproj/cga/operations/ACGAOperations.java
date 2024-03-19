@@ -18,23 +18,22 @@ public abstract class ACGAOperations {
         posMin = this.points.get(0).copy();
         posMax = this.points.get(0).copy();
         this.points.forEach(cgaPoint -> {
-            posMin.x = Double.min(posMin.x, cgaPoint.x);
-            posMin.y = Double.min(posMin.y, cgaPoint.y);
-            posMin.z = Double.min(posMin.z, cgaPoint.z);
+            posMin.setX(Double.min(posMin.getX(), cgaPoint.getX()));
+            posMin.setY(Double.min(posMin.getY(), cgaPoint.getY()));
+            posMin.setZ(Double.min(posMin.getZ(), cgaPoint.getZ()));
 
-            posMax.x = Double.max(posMax.x, cgaPoint.x);
-            posMax.y = Double.max(posMax.y, cgaPoint.y);
-            posMax.z = Double.max(posMax.z, cgaPoint.z);
+            posMax.setX(Double.max(posMax.getX(), cgaPoint.getX()));
+            posMax.setY(Double.max(posMax.getY(), cgaPoint.getY()));
+            posMax.setZ(Double.max(posMax.getZ(), cgaPoint.getZ()));
         });
     }
 
     protected void summon(World world, Material material, Predicate<CGAPoint> predicate) {
-        for (int i = ((int) this.posMin.x); i <= this.posMax.x; i++) {
-            for (int j = ((int) this.posMin.y); j <= this.posMax.y; j++) {
-                for (int k = ((int) this.posMin.z); k <= this.posMax.z; k++) {
+        for (int i = ((int) this.posMin.getX()); i <= this.posMax.getX(); i++) {
+            for (int j = ((int) this.posMin.getY()); j <= this.posMax.getY(); j++) {
+                for (int k = ((int) this.posMin.getZ()); k <= this.posMax.getZ(); k++) {
                     CGAPoint p = new CGAPoint(i,j,k);
-                    if (true || predicate.test(p)) {
-                        System.out.println(p);
+                    if (predicate.test(p)) {
                         Block block = world.getBlockAt(p.toLocation(world));
                         block.setType(material);
                     }

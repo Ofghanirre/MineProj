@@ -9,8 +9,4 @@ public class CGACircle {
         this.center = center;
         this.radius = radius;
     }
-
-/*    public static CGACircle fromThreePoints(CGAPoint point1, CGAPoint point2, CGAPoint point3) {
-
-    }*/
 }
