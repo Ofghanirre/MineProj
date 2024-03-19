@@ -1,8 +1,10 @@
 package fr.ofghanirre.mineproj;
 
+import fr.ofghanirre.mineproj.cga.atoms.CGAAtom;
 import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
 import fr.ofghanirre.mineproj.cga.CGAPointHolder;
 import fr.ofghanirre.mineproj.commands.GeoProjCommands;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,6 +34,9 @@ public class GeoProjectivePlugin extends JavaPlugin {
         getLogger().info("onEnable is called!");
         Objects.requireNonNull(this.getCommand("cga")).setExecutor(new GeoProjCommands());
         this.world = this.getServer().getWorlds().get(0);
+        this.getServer().setMotd(
+                ChatColor.AQUA +"GeoProjective" + ChatColor.GOLD + " Project server Host\n"
+              + ChatColor.BLUE + ChatColor.BOLD + "IGM" + ChatColor.GRAY + " - 2023/24  " + ChatColor.GREEN + "Antonin JEAN");
 
         this.pointHolder = new CGAPointHolder(this.world);
     }

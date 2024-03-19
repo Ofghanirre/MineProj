@@ -33,7 +33,7 @@ public abstract class ACGAOperations {
             for (int j = ((int) this.posMin.y); j <= this.posMax.y; j++) {
                 for (int k = ((int) this.posMin.z); k <= this.posMax.z; k++) {
                     CGAPoint p = new CGAPoint(i,j,k);
-                    if (true || predicate.test(p)) {
+                    if (predicate.test(p)) {
                         System.out.println(p);
                         Block block = world.getBlockAt(p.toLocation(world));
                         block.setType(material);
