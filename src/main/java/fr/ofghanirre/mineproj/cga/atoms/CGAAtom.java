@@ -158,20 +158,12 @@ public class CGAAtom {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
-        // Affichage du type
         sb.append("Type: ").append(type).append("\n");
-
-        // Labels des colonnes
-        sb.append(String.format("\t%-8s%-8s%-8s%-8s\n", "e0", "e1", "e2", "e3"));
-
-        // Affichage de la matrice
-        for (int i = 0; i < 4; i++) {
-            sb.append(String.format("e%d\t", i));
-            for (int j = 0; j < 4; j++) {
-                sb.append(String.format("%.2f\t", _vector[i * 4 + j]));
+        for (int i = 0; i < _vector.length; i++) {
+            if (_vector[i] != 0) {
+                CGAAtomKey key = CGAAtomKey.values()[i];
+                sb.append(key).append(" : ").append(_vector[i]).append("\n");
             }
-            sb.append("\n");
         }
         return sb.toString();
     }
