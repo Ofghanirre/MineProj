@@ -90,9 +90,9 @@ public class CGAAtom {
 
         // Assignation des valeurs au résultat
         result.put(CGAAtomKey.e123, e123);
-        result.put(CGAAtomKey.e01, e01);
-        result.put(CGAAtomKey.e02, e02);
-        result.put(CGAAtomKey.e03, e03);
+        result.put(CGAAtomKey.e1, e01);
+        result.put(CGAAtomKey.e2, e02);
+        result.put(CGAAtomKey.e3, e03);
 
         // Définir le type du résultat
         return result;
@@ -108,16 +108,15 @@ public class CGAAtom {
         double z = (circle.get(CGAAtomKey.e12) * point.get(CGAAtomKey.e2) - (- circle.get(CGAAtomKey.e31)) * point.get(CGAAtomKey.e1)) / circle.get(CGAAtomKey.e123);
 
         // Calcul du rayon de la sphère
-        double radiusSquared = (circle.get(CGAAtomKey.e1) * point.get(CGAAtomKey.e1) +
-                circle.get(CGAAtomKey.e2) * point.get(CGAAtomKey.e2) +
-                circle.get(CGAAtomKey.e3) * point.get(CGAAtomKey.e3) -
-                circle.get(CGAAtomKey.e123) * point.get(CGAAtomKey.e123)) / circle.get(CGAAtomKey.e123);
+        double distanceSquared = (x - point.get(CGAAtomKey.e1)) * (x - point.get(CGAAtomKey.e1)) +
+                (y - point.get(CGAAtomKey.e2)) * (y - point.get(CGAAtomKey.e2)) +
+                (z - point.get(CGAAtomKey.e3)) * (z - point.get(CGAAtomKey.e3));
 
         // Assigner les coordonnées du centre et le rayon à la sphère
         result.put(CGAAtomKey.e1, x);
         result.put(CGAAtomKey.e2, y);
         result.put(CGAAtomKey.e3, z);
-        result.put(CGAAtomKey.e123, radiusSquared);
+        result.put(CGAAtomKey.e123, distanceSquared);
 
         return result;
     }

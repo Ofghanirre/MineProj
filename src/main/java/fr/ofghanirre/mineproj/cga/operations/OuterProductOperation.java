@@ -26,6 +26,7 @@ public class OuterProductOperation extends ACGAOperations {
     public void compute(World world, Material material) {
         summon(world, material, cgaPoint -> {
             CGAAtom result = point.outerProduct(cgaPoint);
+            System.out.println(result);
             return result.isZero();
         });
     }
