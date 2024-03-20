@@ -86,6 +86,7 @@ public class CGAPointHolder {
 
     public CGAAtom compute(EComputeOperation eComputeOperation) {
         OuterProductOperation outerProductOperation = new OuterProductOperation(this.registeredPoints);
+
         List<BlockTypeRegistration> cachedBlocks = outerProductOperation.compute(GeoProjectivePlugin.getInstance().getWorld(), Material.STONE);
         this.computedOperationsCache.add(new CGAComputedPoint(eComputeOperation, List.copyOf(registeredPoints), cachedBlocks));
         clearPoints();
@@ -111,5 +112,9 @@ public class CGAPointHolder {
 
     public List<CGAAtomType> listPointsInfo() {
         return this.registeredPoints.stream().map(CGAAtom::getType).toList();
+    }
+
+    public List<CGAPoint> getRegisteredPoints() {
+        return List.copyOf(this.registeredPoints);
     }
 }

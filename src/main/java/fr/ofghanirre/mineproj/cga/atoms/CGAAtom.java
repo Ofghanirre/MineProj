@@ -154,6 +154,10 @@ public class CGAAtom {
         return result;
     }
 
+    public boolean isDisplayable() {
+        return type == CGAAtomType.POINT || type == CGAAtomType.CIRCLE || type == CGAAtomType.SPHERE;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -161,7 +165,7 @@ public class CGAAtom {
         for (int i = 0; i < _vector.length; i++) {
             if (_vector[i] != 0) {
                 CGAAtomKey key = CGAAtomKey.values()[i];
-                sb.append(key).append(" : ").append(_vector[i]).append("\n");
+                sb.append(key).append(" : ").append(String.format("%.2f",_vector[i])).append("\n");
             }
         }
         return sb.toString();
