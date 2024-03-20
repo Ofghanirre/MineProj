@@ -1,9 +1,12 @@
 package fr.ofghanirre.mineproj.commands;
 
 import fr.ofghanirre.mineproj.GeoProjectivePlugin;
+import fr.ofghanirre.mineproj.cga.BehaviourNotHandled;
+import fr.ofghanirre.mineproj.cga.atoms.CGAAtom;
 import fr.ofghanirre.mineproj.cga.atoms.CGAAtomType;
 import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
 import fr.ofghanirre.mineproj.cga.operations.EComputeOperation;
+import jdk.jshell.spi.ExecutionControl;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -81,8 +84,13 @@ public class GeoProjCommands implements CommandExecutor {
         COMMANDS.put("size", new CommandPacket((sender, args) -> sendMessage(sender, ChatColor.GREEN + "Size : " + GeoProjectivePlugin.getInstance().getPointHolder().size()), "Get the current amount of Points registered."));
 
         COMMANDS.put("outer", new CommandPacket((sender, args) -> {
-            GeoProjectivePlugin.getInstance().getPointHolder().compute(EComputeOperation.OUTERPRODUCT);
-            sendMessage(sender, ChatColor.GREEN + "The points have been computed");
+            try {
+                CGAAtom cgaAtom = GeoProjectivePlugin.getInstance().getPointHolder().compute(EComputeOperation.OUTERPRODUCT);
+                sendMessage(sender, ChatColor.GREEN + "The points have been computed. The computation led to the following CGAAtom:");
+                sender.sendMessage(ChatColor.LIGHT_PURPLE + cgaAtom.toString());
+            } catch (BehaviourNotHandled e) {
+                sender.sendMessage(ChatColor.RED + "The behaviour you asked for is either incoherent or is not implemented yet!");
+            }
         }, "Execute an outer product on the points"));
 
         COMMANDS.put("undo", new CommandPacket((sender, args) -> {

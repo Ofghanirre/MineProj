@@ -1,5 +1,6 @@
 package fr.ofghanirre.mineproj.cga.operations;
 
+import fr.ofghanirre.mineproj.cga.atoms.CGAAtom;
 import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
 import fr.ofghanirre.mineproj.cga.operations.atoms.BlockTypeRegistration;
 import org.bukkit.Location;
@@ -15,6 +16,9 @@ public abstract class ACGAOperations {
     protected final CGAPoint posMin;
     protected final CGAPoint posMax;
     protected final List<CGAPoint> points;
+
+    protected CGAAtom cgaAtom;
+
 
     public ACGAOperations(List<CGAPoint> list) {
         points = list;
@@ -61,5 +65,13 @@ public abstract class ACGAOperations {
 
     public List<CGAPoint> getPoints() {
         return points;
+    }
+
+    public CGAAtom getCgaAtom() {
+        return cgaAtom;
+    }
+
+    public void setCgaAtom(CGAAtom cgaAtom) {
+        this.cgaAtom = cgaAtom;
     }
 }

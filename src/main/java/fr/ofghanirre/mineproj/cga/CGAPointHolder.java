@@ -22,7 +22,6 @@ public class CGAPointHolder {
     private final List<CGAPoint> registeredPoints = new ArrayList<>();
     private final List<CGAPoint> deletedRegisteredPoints = new ArrayList<>();
     private final List<CGAComputedPoint> computedOperationsCache = new ArrayList<>();
-    private final List<CGAComputedPoint> undoneComputedOperationsCache = new ArrayList<>();
 
     public CGAPointHolder(World world) {
         this.world = world;
@@ -85,11 +84,12 @@ public class CGAPointHolder {
         return registeredPoints.size();
     }
 
-    public void compute(EComputeOperation eComputeOperation) {
+    public CGAAtom compute(EComputeOperation eComputeOperation) {
         OuterProductOperation outerProductOperation = new OuterProductOperation(this.registeredPoints);
         List<BlockTypeRegistration> cachedBlocks = outerProductOperation.compute(GeoProjectivePlugin.getInstance().getWorld(), Material.STONE);
         this.computedOperationsCache.add(new CGAComputedPoint(eComputeOperation, List.copyOf(registeredPoints), cachedBlocks));
         clearPoints();
+        return outerProductOperation.getCgaAtom();
     }
 
     public Optional<CGAComputedPoint> undo() {

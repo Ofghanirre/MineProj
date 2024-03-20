@@ -10,7 +10,6 @@ import java.util.List;
 
 public class OuterProductOperation extends ACGAOperations {
 
-    private final CGAAtom point;
     public OuterProductOperation(List<CGAPoint> list) {
         super(list);
         System.out.println(list);
@@ -19,14 +18,14 @@ public class OuterProductOperation extends ACGAOperations {
             System.out.println("Point OP:\n" + temp);
             temp = temp.outerProduct(points.get(i));
         }
-        point = temp;
-        System.out.println("POINT FINAL :\n" + point);
+        cgaAtom = temp;
+        System.out.println("POINT FINAL :\n" + cgaAtom);
     }
 
     @Override
     public List<BlockTypeRegistration> compute(World world, Material material) {
         return summon(world, material, cgaPoint -> {
-            CGAAtom result = point.outerProduct(cgaPoint);
+            CGAAtom result = cgaAtom.outerProduct(cgaPoint);
             System.out.println(result);
             return result.isZero();
         });
