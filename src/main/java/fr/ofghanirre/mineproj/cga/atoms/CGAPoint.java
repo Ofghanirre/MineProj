@@ -2,9 +2,6 @@ package fr.ofghanirre.mineproj.cga.atoms;
 
 import fr.ofghanirre.mineproj.NotImplementedException;
 import org.bukkit.Location;
-import org.joml.Vector3d;
-
-import java.lang.invoke.WrongMethodTypeException;
 
 public class CGAPoint extends CGAAtom  {
 

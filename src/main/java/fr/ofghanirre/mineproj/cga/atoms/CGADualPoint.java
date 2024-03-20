@@ -3,8 +3,6 @@ package fr.ofghanirre.mineproj.cga.atoms;
 import fr.ofghanirre.mineproj.NotImplementedException;
 import org.bukkit.Location;
 
-import java.lang.invoke.WrongMethodTypeException;
-
 public class CGADualPoint extends CGAAtom {
     public CGADualPoint(double x, double y, double z) {
         super(ECGADimension.LINE, x, y, z, 0L);
