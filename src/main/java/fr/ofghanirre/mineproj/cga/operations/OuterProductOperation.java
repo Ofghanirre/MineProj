@@ -2,6 +2,7 @@ package fr.ofghanirre.mineproj.cga.operations;
 
 import fr.ofghanirre.mineproj.cga.atoms.CGAAtom;
 import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
+import fr.ofghanirre.mineproj.cga.operations.atoms.BlockTypeRegistration;
 import org.bukkit.Material;
 import org.bukkit.World;
 
@@ -23,8 +24,8 @@ public class OuterProductOperation extends ACGAOperations {
     }
 
     @Override
-    public void compute(World world, Material material) {
-        summon(world, material, cgaPoint -> {
+    public List<BlockTypeRegistration> compute(World world, Material material) {
+        return summon(world, material, cgaPoint -> {
             CGAAtom result = point.outerProduct(cgaPoint);
             System.out.println(result);
             return result.isZero();

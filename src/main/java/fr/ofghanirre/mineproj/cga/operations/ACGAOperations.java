@@ -1,10 +1,13 @@
 package fr.ofghanirre.mineproj.cga.operations;
 
 import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
+import fr.ofghanirre.mineproj.cga.operations.atoms.BlockTypeRegistration;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -28,21 +31,25 @@ public abstract class ACGAOperations {
         });
     }
 
-    protected void summon(World world, Material material, Predicate<CGAPoint> predicate) {
+    protected List<BlockTypeRegistration> summon(World world, Material material, Predicate<CGAPoint> predicate) {
+        List<BlockTypeRegistration> result = new ArrayList<>();
         for (int i = ((int) this.posMin.getX()); i <= this.posMax.getX(); i++) {
             for (int j = ((int) this.posMin.getY()); j <= this.posMax.getY(); j++) {
                 for (int k = ((int) this.posMin.getZ()); k <= this.posMax.getZ(); k++) {
                     CGAPoint p = new CGAPoint(i,j,k);
                     if (predicate.test(p)) {
-                        Block block = world.getBlockAt(p.toLocation(world));
+                        Location location = p.toLocation(world);
+                        Block block = world.getBlockAt(location);
+                        result.add(new BlockTypeRegistration(location, block.getType()));
                         block.setType(material);
                     }
                 }
             }
         }
+        return result;
     }
 
-    public abstract void compute(World world, Material material);
+    public abstract List<BlockTypeRegistration> compute(World world, Material material);
 
     public CGAPoint getPosMin() {
         return posMin;

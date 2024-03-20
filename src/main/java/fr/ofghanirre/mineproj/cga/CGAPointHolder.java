@@ -1,7 +1,10 @@
 package fr.ofghanirre.mineproj.cga;
 
 import fr.ofghanirre.mineproj.GeoProjectivePlugin;
-import fr.ofghanirre.mineproj.cga.atoms.CGAComputedPoint;
+import fr.ofghanirre.mineproj.cga.atoms.CGAAtom;
+import fr.ofghanirre.mineproj.cga.atoms.CGAAtomType;
+import fr.ofghanirre.mineproj.cga.operations.atoms.BlockTypeRegistration;
+import fr.ofghanirre.mineproj.cga.operations.atoms.CGAComputedPoint;
 import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
 import fr.ofghanirre.mineproj.cga.operations.EComputeOperation;
 import fr.ofghanirre.mineproj.cga.operations.OuterProductOperation;
@@ -12,12 +15,14 @@ import org.bukkit.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CGAPointHolder {
     private final World world;
     private final List<CGAPoint> registeredPoints = new ArrayList<>();
     private final List<CGAPoint> deletedRegisteredPoints = new ArrayList<>();
-    private final List<CGAComputedPoint> computedPoints = new ArrayList<>();
+    private final List<CGAComputedPoint> computedOperationsCache = new ArrayList<>();
+    private final List<CGAComputedPoint> undoneComputedOperationsCache = new ArrayList<>();
 
     public CGAPointHolder(World world) {
         this.world = world;
@@ -82,6 +87,29 @@ public class CGAPointHolder {
 
     public void compute(EComputeOperation eComputeOperation) {
         OuterProductOperation outerProductOperation = new OuterProductOperation(this.registeredPoints);
-        outerProductOperation.compute(GeoProjectivePlugin.getInstance().getWorld(), Material.STONE);
+        List<BlockTypeRegistration> cachedBlocks = outerProductOperation.compute(GeoProjectivePlugin.getInstance().getWorld(), Material.STONE);
+        this.computedOperationsCache.add(new CGAComputedPoint(eComputeOperation, List.copyOf(registeredPoints), cachedBlocks));
+        clearPoints();
+    }
+
+    public Optional<CGAComputedPoint> undo() {
+        if (this.computedOperationsCache.isEmpty()) return Optional.empty();
+        CGAComputedPoint lastAction = this.computedOperationsCache.remove(this.computedOperationsCache.size() - 1);
+        for (BlockTypeRegistration blockTypeRegistration : lastAction.blockMemory()) {
+            this.world.getBlockAt(blockTypeRegistration.location()).setType(blockTypeRegistration.material());
+        }
+        clearPoints();
+        for (CGAPoint point : lastAction.points()) {
+            addPoint(point);
+        }
+        return Optional.of(lastAction);
+    }
+
+    public String info(Integer targetAmount) {
+        return this.registeredPoints.get(targetAmount).toString();
+    }
+
+    public List<CGAAtomType> listPointsInfo() {
+        return this.registeredPoints.stream().map(CGAAtom::getType).toList();
     }
 }

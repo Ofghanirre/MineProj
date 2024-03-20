@@ -3,14 +3,13 @@ package fr.ofghanirre.mineproj.cga.atoms;
 import fr.ofghanirre.mineproj.cga.MinecraftLocationRelated;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.joml.Vector3d;
 
 public class CGAPoint extends CGAAtom implements MinecraftLocationRelated {
     public CGAPoint(double x, double y, double z) {
         super(CGAAtomType.POINT);
-        this.put(CGAAtomKey.e1, x);
-        this.put(CGAAtomKey.e2, y);
-        this.put(CGAAtomKey.e3, z);
+        this.set(CGAAtomKey.e1, x);
+        this.set(CGAAtomKey.e2, y);
+        this.set(CGAAtomKey.e3, z);
     }
 
     public CGAPoint(Location location) {
@@ -28,15 +27,15 @@ public class CGAPoint extends CGAAtom implements MinecraftLocationRelated {
     }
 
     public void setX(double value) {
-        this.put(CGAAtomKey.e1, value);
+        this.set(CGAAtomKey.e1, value);
     }
 
     public void setY(double value) {
-        this.put(CGAAtomKey.e2, value);
+        this.set(CGAAtomKey.e2, value);
     }
 
     public void setZ(double value) {
-        this.put(CGAAtomKey.e3, value);
+        this.set(CGAAtomKey.e3, value);
     }
 
 

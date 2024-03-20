@@ -45,11 +45,11 @@ public class CGAAtom {
 
     public static CGAAtom fromEuclideanPoint(double x, double y, double z) {
         CGAAtom result = new CGAAtom();
-        result.put(CGAAtomKey.e1, x);   // Coordonnée x
-        result.put(CGAAtomKey.e2, y);   // Coordonnée y
-        result.put(CGAAtomKey.e3, z);   // Coordonnée z
-        result.put(CGAAtomKey.e0, 1);   // Élément neutre pour l'addition
-        result.put(CGAAtomKey.eInf, 0); // Élément à l'infini
+        result.set(CGAAtomKey.e1, x);   // Coordonnée x
+        result.set(CGAAtomKey.e2, y);   // Coordonnée y
+        result.set(CGAAtomKey.e3, z);   // Coordonnée z
+        result.set(CGAAtomKey.e0, 1);   // Élément neutre pour l'addition
+        result.set(CGAAtomKey.eInf, 0); // Élément à l'infini
         return result;
     }
 
@@ -57,7 +57,7 @@ public class CGAAtom {
         return this._vector[key.ordinal()];
     }
 
-    public CGAAtom put(CGAAtomKey key, double value) {
+    public CGAAtom set(CGAAtomKey key, double value) {
         this._vector[key.ordinal()] = value;
         return this;
     }
@@ -66,9 +66,9 @@ public class CGAAtom {
     protected static CGAAtom pointOuterProductPoint(CGAAtom point1, CGAAtom point2) {
         CGAAtom result = new CGAAtom(CGAAtomType.DUAL_POINT);
         // Calcul de l'outer product
-        result.put(CGAAtomKey.e12, point1.get(CGAAtomKey.e1) * point2.get(CGAAtomKey.e2) - point1.get(CGAAtomKey.e2) * point2.get(CGAAtomKey.e1));
-        result.put(CGAAtomKey.e23, point1.get(CGAAtomKey.e2) * point2.get(CGAAtomKey.e3) - point1.get(CGAAtomKey.e3) * point2.get(CGAAtomKey.e2));
-        result.put(CGAAtomKey.e31, point1.get(CGAAtomKey.e3) * point2.get(CGAAtomKey.e1) - point1.get(CGAAtomKey.e1) * point2.get(CGAAtomKey.e3));
+        result.set(CGAAtomKey.e12, point1.get(CGAAtomKey.e1) * point2.get(CGAAtomKey.e2) - point1.get(CGAAtomKey.e2) * point2.get(CGAAtomKey.e1));
+        result.set(CGAAtomKey.e23, point1.get(CGAAtomKey.e2) * point2.get(CGAAtomKey.e3) - point1.get(CGAAtomKey.e3) * point2.get(CGAAtomKey.e2));
+        result.set(CGAAtomKey.e31, point1.get(CGAAtomKey.e3) * point2.get(CGAAtomKey.e1) - point1.get(CGAAtomKey.e1) * point2.get(CGAAtomKey.e3));
         return result;
     }
 
@@ -89,10 +89,10 @@ public class CGAAtom {
                 dualPoint.get(CGAAtomKey.e23) * point.get(CGAAtomKey.e1);
 
         // Assignation des valeurs au résultat
-        result.put(CGAAtomKey.e123, e123);
-        result.put(CGAAtomKey.e1, e01);
-        result.put(CGAAtomKey.e2, e02);
-        result.put(CGAAtomKey.e3, e03);
+        result.set(CGAAtomKey.e123, e123);
+        result.set(CGAAtomKey.e1, e01);
+        result.set(CGAAtomKey.e2, e02);
+        result.set(CGAAtomKey.e3, e03);
 
         // Définir le type du résultat
         return result;
@@ -113,10 +113,10 @@ public class CGAAtom {
                 (z - point.get(CGAAtomKey.e3)) * (z - point.get(CGAAtomKey.e3));
 
         // Assigner les coordonnées du centre et le rayon à la sphère
-        result.put(CGAAtomKey.e1, x);
-        result.put(CGAAtomKey.e2, y);
-        result.put(CGAAtomKey.e3, z);
-        result.put(CGAAtomKey.e123, distanceSquared);
+        result.set(CGAAtomKey.e1, x);
+        result.set(CGAAtomKey.e2, y);
+        result.set(CGAAtomKey.e3, z);
+        // result.set(CGAAtomKey.e123, distanceSquared);
 
         return result;
     }
