@@ -1,7 +1,7 @@
 package fr.ofghanirre.mineproj;
 
-import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
 import fr.ofghanirre.mineproj.cga.CGAPointHolder;
+import fr.ofghanirre.mineproj.cga.atoms.CGAPoint;
 import fr.ofghanirre.mineproj.commands.GeoProjCommands;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
