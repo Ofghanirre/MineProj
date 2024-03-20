@@ -116,7 +116,7 @@ public class CGAAtom {
         result.set(CGAAtomKey.e1, x);
         result.set(CGAAtomKey.e2, y);
         result.set(CGAAtomKey.e3, z);
-        // result.set(CGAAtomKey.e123, distanceSquared);
+        result.set(CGAAtomKey.e123, distanceSquared);
 
         return result;
     }
